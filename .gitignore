@@ -1,0 +1,7 @@
+node_modules
+dist
+.parcel-cache
+firebaseKey.json
+.env
+server/dev.ts
+*.js

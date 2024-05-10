@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "@vaadin/router": "^1.7.5",
+    "express": "^4.19.2",
+    "nodemon": "^3.1.0",
+    "typescript": "^5.4.5"
+  },
+  "scripts": {
+    "dev:front": "parcel serve ./src/index.html"
+  },
+  "devDependencies": {
+    "parcel": "^2.0.0-rc.0"
+  }
+}
