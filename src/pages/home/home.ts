@@ -21,19 +21,19 @@ class Home extends HTMLElement {
             </div>
         <form class="form">
             <div class="name-container">
-                <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" required>
+                <label for="name">Nombre:</label>
+                <input type="text" id="name" name="name" required>
             </div>
             <div>
                 <p>Ya tienes una sala de chat? <br> Si no tienes creá una nueva!</p>
-                <input type="radio" id="nuevaSala" name="tipoSala" value="nueva" required>
-                <label for="nuevaSala">Nueva sala</label><br>
-                <input type="radio" id="existenteSala" name="tipoSala" value="existente" required>
-                <label for="existenteSala">Sala existente</label>
+                <input type="radio" id="newRoom" name="typeRoom" value="new" required>
+                <label for="newRoom">Nueva sala</label><br>
+                <input type="radio" id="oldRoom" name="typeRoom" value="old" required>
+                <label for="oldRoom">Sala existente</label>
             </div>
-            <div id="codigoSala" style="display: none;">
-                <label for="codigo">Código de la sala:</label>
-                <input type="text" id="codigo" name="codigo">
+            <div id="code-room" style="display: none;">
+                <label for="code">Código de la sala:</label>
+                <input type="text" id="code" name="code">
             </div>
             <button type="submit">Enviar</button>
         </form>     
@@ -41,11 +41,30 @@ class Home extends HTMLElement {
         `;
 
     const formEl = this.shadow.querySelector(".form");
-    console.log(formEl);
 
-    formEl.addEventListener("submit", (e) => {
+    formEl?.addEventListener("submit", (e) => {
       e.preventDefault();
+      const target = e.target as any;
+      console.log(target.name.value);
       Router.go("chat");
+    });
+
+    const newRoomEl = this.shadow.getElementById("newRoom") as HTMLInputElement;
+    const oldRoomEl = this.shadow.getElementById("oldRoom") as HTMLInputElement;
+    const codeRoomEl = this.shadow.getElementById(
+      "code-room"
+    ) as HTMLDivElement;
+    const codeInputEl = this.shadow.getElementById("code") as HTMLInputElement;
+    console.log(newRoomEl, oldRoomEl, codeRoomEl, codeInputEl);
+
+    newRoomEl?.addEventListener("change", () => {
+      if (codeRoomEl) codeRoomEl.style.display = "none";
+      if (codeInputEl) codeInputEl.required = false;
+    });
+
+    oldRoomEl?.addEventListener("change", () => {
+      if (codeRoomEl) codeRoomEl.style.display = "block";
+      if (codeInputEl) codeInputEl.required = true;
     });
 
     const style = document.createElement("style");
@@ -101,24 +120,3 @@ class Home extends HTMLElement {
 }
 
 customElements.define("home-comp", Home);
-
-/**
- 
- <script>
-        var nuevaSalaRadio = document.getElementById('nuevaSala');
-        var existenteSalaRadio = document.getElementById('existenteSala');
-        var codigoSalaDiv = document.getElementById('codigoSala');
-        var codigoInput = document.getElementById('codigo');
-
-        nuevaSalaRadio.addEventListener('change', function() {
-            codigoSalaDiv.style.display = 'none';
-            codigoInput.required = false;
-        });
-
-        existenteSalaRadio.addEventListener('change', function() {
-            codigoSalaDiv.style.display = 'block';
-            codigoInput.required = true;
-        });
-    </script>
-
- */

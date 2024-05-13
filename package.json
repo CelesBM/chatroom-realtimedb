@@ -1,14 +1,18 @@
 {
   "dependencies": {
     "@vaadin/router": "^1.7.5",
+    "cors": "^2.8.5",
     "express": "^4.19.2",
+    "firebase": "8.7.1",
+    "firebase-admin": "^12.1.0",
     "nodemon": "^3.1.0",
     "typescript": "^5.4.5"
   },
   "scripts": {
+    "dev": "nodemon --watch src/index.ts --exec ts-node src/index.ts",
     "dev:front": "parcel serve ./src/index.html"
   },
   "devDependencies": {
-    "parcel": "^2.0.0-rc.0"
+    "parcel": "^2.12.0"
   }
 }
